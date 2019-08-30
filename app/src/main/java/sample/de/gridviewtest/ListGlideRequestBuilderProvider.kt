@@ -1,4 +1,4 @@
-package restfs.sample.de.gridviewtest
+package sample.de.gridviewtest
 
 import android.app.Activity
 import android.graphics.Bitmap

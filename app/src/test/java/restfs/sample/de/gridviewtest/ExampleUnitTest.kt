@@ -1,4 +1,4 @@
-package restfs.sample.de.gridviewtest
+package sample.de.gridviewtest
 
 import org.junit.Test
 

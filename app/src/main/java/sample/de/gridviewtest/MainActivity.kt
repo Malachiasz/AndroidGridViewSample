@@ -1,9 +1,8 @@
-package restfs.sample.de.gridviewtest
+package sample.de.gridviewtest
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
@@ -45,7 +44,9 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val imageView = holder.itemView as ImageView
 
-            imageView.setOnClickListener { Toast.makeText(applicationContext, "Position: $position", Toast.LENGTH_SHORT).show() }
+            imageView.setOnClickListener {
+                Toast.makeText(applicationContext, "Position: $position", Toast.LENGTH_SHORT).show()
+            }
             val url = computeUrlForPosition(position)
             holder.itemView.setBackgroundColor(position * position + 1500 * 1500)
 
@@ -115,15 +116,28 @@ class MainActivity : AppCompatActivity() {
         gridLayoutManager.isSmoothScrollbarEnabled = true
 
         //     adapter.setHasStableIds(true)
-        listGlideRequestBuilderProvider = ListGlideRequestBuilderProvider(this, android.R.drawable.ic_lock_lock, android.R.dimen.thumbnail_width, R.dimen.image_rounding)
+        listGlideRequestBuilderProvider = ListGlideRequestBuilderProvider(
+            this,
+            android.R.drawable.ic_lock_lock,
+            android.R.dimen.thumbnail_width,
+            R.dimen.image_rounding
+        )
 
         recyclerView.setItemViewCacheSize(20)
         recyclerView.itemAnimator = null
         recyclerView.layoutManager = gridLayoutManager
         recyclerView.adapter = adapter
 
-        val sizeProvider: ListPreloader.PreloadSizeProvider<String> = FixedPreloadSizeProvider(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-        recyclerView.addOnScrollListener(RecyclerViewPreloader<String>(Glide.with(this), adapter as ListPreloader.PreloadModelProvider<String>, sizeProvider, 75))
+        val sizeProvider: ListPreloader.PreloadSizeProvider<String> =
+            FixedPreloadSizeProvider(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+        recyclerView.addOnScrollListener(
+            RecyclerViewPreloader<String>(
+                Glide.with(this),
+                adapter as ListPreloader.PreloadModelProvider<String>,
+                sizeProvider,
+                75
+            )
+        )
 
 
         scrollbar.setRecyclerView(recyclerView)
