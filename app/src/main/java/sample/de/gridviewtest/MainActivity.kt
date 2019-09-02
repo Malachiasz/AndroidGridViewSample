@@ -135,11 +135,13 @@ class MainActivity : AppCompatActivity() {
                 Glide.with(this),
                 adapter as ListPreloader.PreloadModelProvider<String>,
                 sizeProvider,
-                75
+                2
             )
         )
 
 
         scrollbar.setRecyclerView(recyclerView)
+
+        Thread(Runnable { CacheClearer().deleteCache(applicationContext) }).start() // to test network requests cache is cleared on start
     }
 }

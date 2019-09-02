@@ -33,8 +33,8 @@ class OkHttpGlideModule : LibraryGlideModule() {
             .addNetworkInterceptor { chain ->
                 val request = chain.request()
                 val response = chain.proceed(request)
-                val requestDuration = response.receivedResponseAtMillis() - response.sentRequestAtMillis()
-                Timber.d("Request duration $requestDuration Url:${request.url()}")
+                val requestDuration = response.receivedResponseAtMillis - response.sentRequestAtMillis
+                Timber.d("Request duration $requestDuration Url:${request.url}")
                 response.newBuilder().build()
             }
             .build()
